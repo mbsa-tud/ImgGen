@@ -1,4 +1,4 @@
-# ImageGen Project
+# RISC - Realistic Imaging for Safety-Critical Cobots
 
 ## Overview
 
