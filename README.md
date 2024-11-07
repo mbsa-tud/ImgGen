@@ -1,3 +1,5 @@
+![](https://www.beschaeftigte.uni-stuttgart.de/uni-services/oeffentlichkeitsarbeit/corporate-design/cd-dateien/01_Logo/png/unistuttgart_logo_deutsch_cmyk-01.png)
+
 # RISC - Realistic Imaging for Safety-Critical Cobots
 
 ## Overview
