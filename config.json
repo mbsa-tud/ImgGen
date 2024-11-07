@@ -1,0 +1,64 @@
+{
+  "SceneParameters": {
+    "SceneSelection": "C:/Users/ac140891/PycharmProjects/ImageGen/Scenes/sceneDrilling.blend",
+    "Human": {
+      "Randomization": 1,
+      "PositionRange": {
+        "x": [0, 1.5],
+        "y": [0, -0.35]
+      },
+      "ArmRangeRight": [20,-50],
+      "ArmRangeLeft": [-20, 50],
+      "Gloves": 1
+    },
+    "Manipulator": {
+      "Randomization": 1,
+      "MotionRange": {
+        "x": [1,1.8],
+        "y": [-1,1],
+        "z": [1.65,2.5]
+      }
+    },
+    "Workpiece": {
+      "Randomization": 1,
+      "Color": [0.03, 0.03, 0.03],
+      "SizeRange":{
+        "x": [0.5,1.5],
+        "y": [0.5,1.5]
+      },
+      "PositionRange":{
+        "x": [-1, 1.35],
+        "y": [-0.5, 0.8]
+      }
+    },
+    "SafetyZone": {
+      "Distance": 0.4
+    },
+    "Camera": {
+      "FocalLength": 32,
+      "CameraDistance": [3, 7],
+      "ImageSize": [720, 720]
+    },
+    "Light": {
+      "Type": "AREA",
+      "Intensity": 1000
+    }
+  },
+  "RenderingParameters": {
+    "OutputDir": "C:/Users/ac140891/PycharmProjects/ImageGenerator/output",
+    "NumberImages": 5
+  },
+  "LabelParameters": {
+    "CategoryIDs": {
+      "Gripper": 1,
+      "drillbit": 1,
+      "weldingbit": 1,
+      "Panda": 1,
+      "Armature": 2,
+      "Gloves" : 2,
+      "Table": 3,
+      "workpiece": 4,
+      "SafetyZone": 5
+    }
+  }
+}
