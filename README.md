@@ -101,7 +101,7 @@ You will see the current progress in your console. Running this script will auto
 To visualize the coco-annotations of a certain image, run in your terminal:
 
 ```bash
-blenderproc vis coco -b output\images -i <Number of your image> -c coco_annotations.json
+blenderproc vis coco -b output -i <Number of your image> -c coco_annotations.json
 ```
 
 This will open a new window with the bounding boxes and segmentation masks within the image.
