@@ -1,6 +1,6 @@
 {
   "SceneParameters": {
-    "SceneSelection": "C:/Users/ac140891/PycharmProjects/ImageGen/Scenes/sceneDrilling.blend",
+    "SceneSelection": "Scenes/sceneDrilling.blend",
     "Human": {
       "Randomization": 1,
       "PositionRange": {
@@ -45,7 +45,7 @@
     }
   },
   "RenderingParameters": {
-    "OutputDir": "C:/Users/ac140891/PycharmProjects/ImageGenerator/output",
+    "OutputDir": "output",
     "NumberImages": 5
   },
   "LabelParameters": {

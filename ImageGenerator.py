@@ -18,15 +18,10 @@ def load_config(config_path):
     Returns:
         dict: A dictionary containing the configuration parameters loaded from the JSON file.
     """
-    # Print a message indicating the start of configuration loading
-    print(f"Loading configuration from {config_path}")
 
     # Open the configuration file and load it as a dictionary
     with open(config_path, 'r') as f:
         config = json.load(f)
-
-    # Print a message indicating that configuration loading is complete
-    print("Configuration completed")
 
     return config
 
@@ -43,7 +38,6 @@ def load_scene_from_blend(file_path, link=False):
         dict: A dictionary categorizing loaded objects. Objects are organized into 'Worker' and 'Panda'
               groups based on their parent objects, or stored individually if they have no specific parent.
     """
-    print(f"Loading scene from: {file_path}")
 
     # Load objects from the .blend file, either linking or appending based on the `link` parameter
     with bpy.data.libraries.load(file_path, link=link) as (data_from, data_to):
@@ -69,7 +63,6 @@ def load_scene_from_blend(file_path, link=False):
             # For standalone objects without a specific parent, store each individually by its name
             loaded_objects[obj.name] = [obj]
 
-    print("Scene loaded successfully.")
     return loaded_objects
 
 
@@ -84,7 +77,6 @@ def assign_objects(scene_objects):
         tuple: A tuple of assigned objects in the following order:
                (table, workpiece, worker, panda, tcp, environment, gripper)
     """
-    print("Assigning loaded objects...")
 
     # Retrieve and assign the 'Table' object
     table = scene_objects["Table"][0]
@@ -107,7 +99,6 @@ def assign_objects(scene_objects):
     # Retrieve the 'Gripper' object
     gripper = scene_objects["Gripper"][0]
 
-    print("Assigning objects completed.")
     return table, workpiece, worker, panda, tcp, environment, gripper
 
 
@@ -120,7 +111,6 @@ def randomize_camera_and_light(table, config):
         config (dict): Configuration dictionary containing parameters for camera distance, resolution,
                        focal length, and light properties.
     """
-    print("Setting up camera and light...")
 
     # Get camera distance range from config and calculate the table's center position in the scene
     camera_distance = config["SceneParameters"]["Camera"]["CameraDistance"]
@@ -160,8 +150,6 @@ def randomize_camera_and_light(table, config):
     # Offset light from camera location for better scene lighting
     light.set_location(camera_location + np.array([1, -1, 2]))
 
-    print("Camera and light setup completed.")
-
 
 def randomize_position(obj, range_x, range_y, range_z=None):
     """
@@ -196,15 +184,12 @@ def randomize_panda(tcp, config):
     Returns:
         tcp: The modified TCP object with its position randomized.
     """
-    print("Randomizing Panda position...")
 
     # Extract the motion range for the TCP from the configuration
     tcp_cfg = config["SceneParameters"]["Manipulator"]["MotionRange"]
 
     # Randomize the TCP's position within the specified x, y, and z ranges
     randomize_position(tcp, tcp_cfg["x"], tcp_cfg["y"], tcp_cfg["z"])
-
-    print("Panda randomization completed.")
 
 
 def randomize_workpiece(workpiece, config):
@@ -218,7 +203,6 @@ def randomize_workpiece(workpiece, config):
     Returns:
         workpiece: The modified workpiece object with randomized size, rotation, and position.
     """
-    print("Randomizing workpiece size, rotation, and position...")
 
     # Extract workpiece configuration details from the config dictionary
     workpiece_cfg = config["SceneParameters"]["Workpiece"]
@@ -236,7 +220,6 @@ def randomize_workpiece(workpiece, config):
     # Randomize the workpiece's position within specified x and y ranges, using helper function `randomize_position`
     randomize_position(workpiece, workpiece_cfg["PositionRange"]["x"], workpiece_cfg["PositionRange"]["y"])
 
-    print("Workpiece randomization completed.")
     return workpiece
 
 
@@ -268,7 +251,6 @@ def randomize_worker(worker, config):
     Returns:
         worker: The modified worker object with randomized arm positions and location.
     """
-    print("Randomizing worker arm positions and location...")
 
     # Extract arm configuration details from the configuration dictionary
     arm_cfg = config["SceneParameters"]["Human"]
@@ -305,8 +287,6 @@ def randomize_worker(worker, config):
 
     # Randomize the overall position of the worker within specified x and y position ranges
     randomize_position(worker, arm_cfg["PositionRange"]["x"], arm_cfg["PositionRange"]["y"])
-
-    print("Worker randomization completed.")
 
 
 def subdivide_object(obj, cuts=10):
@@ -411,13 +391,9 @@ def collision_check_objects(obj1, obj2):
 
             # Check if the vertex lies within the bounding box area in the XY plane
             if is_point_within_xy_area(world_vertex, area_min_x, area_max_x, area_min_y, area_max_y):
-                print(
-                    f"Vertex {vertex.index} is within the specified 2D XY area.")
                 return True  # Collision detected
 
-        # If no collision is detected, print confirmation
-        print("No Collision detected.")
-        return False
+        return False  # No collision detected
     else:
         # Print an error message if obj1 is not found or is not a mesh
         print("Object not found or is not a mesh.")
@@ -581,7 +557,8 @@ def render_scene(config):
     assign_category_ids(categories)
 
     # Set the output directory for saving render results
-    output_dir = config["RenderingParameters"]["OutputDir"]
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(base_dir, config["RenderingParameters"]["OutputDir"])
 
     # Set the maximum amount of samples for rendering quality; default is 1024, here set to 128 for faster rendering
     bproc.renderer.set_max_amount_of_samples(128)
@@ -619,7 +596,9 @@ def log_to_csv(violation, distance, i, config):
         config (dict): Configuration dictionary containing the output directory path.
     """
     # Set the output directory for the CSV file based on config
-    output_dir = config["RenderingParameters"]["OutputDir"]
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(base_dir, config["RenderingParameters"]["OutputDir"])
+
     csv_file = os.path.join(output_dir, "rendered_data.csv")
 
     # Initialize the starting image index
@@ -638,8 +617,8 @@ def log_to_csv(violation, distance, i, config):
         # If the file doesn't exist, start numbering from the provided index `i`
         i = i
 
-    # Determine the name of the rendered image with the updated index
-    image_name = f"image_{i}.jpg"
+    # Format the image name with leading zeros
+    image_name = f"image_{i:06d}.jpg"  # This will format the index `i` to six digits with leading zeros
 
     # Write rendering data to CSV, including headers if file is newly created
     with open(csv_file, mode="a", newline="") as file:
@@ -678,8 +657,10 @@ def main():
     # Initialize the BlenderProc environment
     bproc.init()
 
+    base_dir = os.path.dirname(os.path.abspath(__file__))
     # Load configuration settings from the specified path
-    config_path = r"C:\Users\ac140891\PycharmProjects\ImageGenerator\config.json"
+    config_path = "config.json"
+    config_path = os.path.join(base_dir, config_path)
     config = load_config(config_path)
 
     # Loop through the specified number of images to render
@@ -689,7 +670,7 @@ def main():
         bproc.utility.reset_keyframes()
 
         # Load the scene objects from a .blend file based on the configuration
-        scene_file_path = config["SceneParameters"]["SceneSelection"]
+        scene_file_path = os.path.join(base_dir, config["SceneParameters"]["SceneSelection"])
         scene_objects = load_scene_from_blend(file_path=scene_file_path)
 
         # Assign specific objects from the loaded scene for easy reference
