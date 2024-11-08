@@ -17,12 +17,13 @@ The **ImageGen** project is designed to automate image generation and scene rend
 ## Directory Structure
 
 ```plaintext
-ImageGen/
+RISC/
 │
-├── ImageGenerator.py                    # Main script for rendering pipeline
+├── ImageGenerator.py          # Main script for rendering pipeline
 ├── config.json                # Configuration file with rendering and scene parameters
 ├── README.md                  # Project documentation
-├── docs/                      # Folder for generated documentation
+├── UserManual.md              # User Manual for the config file
+├── requirements.txt           # requirements specs
 │
 ├── Scenes/
 │   ├── textures
@@ -63,9 +64,9 @@ ImageGen/
    pip install -r requirements.txt
    ```
 
-4. **Add Scene to Directory**: Paste the `Scene` Folder in your directory.
+4. **Add Scene Folder to Directory**: Paste the `Scene` Folder in your directory.
 
-5. **Configure the Project**: Update `config.json` with your desired rendering parameters, file paths, and randomization ranges.
+5. **Configure the Project**: Update `config.json` with your desired rendering parameters, file paths, and randomization ranges. See more in [User Manual.](UserManual.md)
 
 ## Usage
 
@@ -83,7 +84,7 @@ Before running the main rendering pipeline, you have to adjust the `config.json`
 - **LabelParameters**:
     - `CategoryIDs`: Dictionary mapping object names to category IDs for segmentation.
 
-For more information on how to adjust the `config.json` parameters, please see UserManual.txt
+For more information on how to adjust the `config.json` parameters, please see [User Manual.](UserManual.md)
 
 ### Running the Image Generator Pipeline
 
