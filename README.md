@@ -12,25 +12,23 @@ The **ImageGen** project is designed to automate image generation and scene rend
 - **Parameter Randomization**: Randomizes the position, size, and orientation of objects in the scene for variation.
 - **Collision and Safety Checking**: Includes logic to check for collisions between specific objects and enforce safety zones.
 - **Rendering and Annotation**: Renders images and segmentation maps and logs metadata in CSV format for easy analysis.
-- **Documentation Generation**: Uses `pdoc` or `Sphinx` to generate documentation from inline docstrings.
+- **Documentation Generation**: Uses `pdoc` to generate documentation from inline docstrings.
 
 ## Directory Structure
 
 ```plaintext
 ImageGen/
 │
-├── temp.py                    # Main script for rendering pipeline
+├── ImageGenerator.py                    # Main script for rendering pipeline
 ├── config.json                # Configuration file with rendering and scene parameters
 ├── README.md                  # Project documentation
 ├── docs/                      # Folder for generated documentation
 │
-├── modules/
-│   ├── __init__.py
-│   ├── scene_setup.py         # Functions for loading and assigning scene objects
-│   ├── randomization.py       # Functions to randomize object parameters
-│   ├── safety.py              # Functions for collision and safety checks
-│   ├── render.py              # Functions for rendering and saving images
-│   └── utils.py               # Utility functions for logging and cleanup
+├── Scenes/
+│   ├── textures
+│   ├── scene.blend            # Scene with Gripper for Pick and Place Tasks
+│   ├── sceneDrilling.blend    # Scene with Drilling Head           
+│   └── sceneWelding.blend     # Scene with Welding Head
 │
 └── venv/                      # Python virtual environment (optional)
 ```
@@ -43,17 +41,13 @@ ImageGen/
 - **Python 3.8+**: The project uses Python to interact with Blender and render scenes.
 - **BlenderProc**: Install BlenderProc, a procedural Blender scripting tool, using the following command:
 
-  ```bash
-  pip install blenderproc
-  ```
 
 ### Installation
 
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/your-username/ImageGen.git
-   cd ImageGen
+   git clone https://github.com/BeSchue/RISC
    ```
 
 2. **Set Up Virtual Environment** (optional but recommended):
@@ -69,58 +63,63 @@ ImageGen/
    pip install -r requirements.txt
    ```
 
-4. **Configure the Project**: Update `config.json` with your desired rendering parameters, file paths, and randomization ranges.
+4. **Add Scene to Directory**: Paste the `Scene` Folder in your directory.
+
+5. **Configure the Project**: Update `config.json` with your desired rendering parameters, file paths, and randomization ranges.
 
 ## Usage
 
-To run the main rendering pipeline, execute the following command:
+Before running the main rendering pipeline, you have to adjust the `config.json`:
+
+### Configuration Parameters
+- **SceneParameters**:
+    - `SceneSelection`: Name of the Blender (.blend) file to load.
+    - `Camera`: Defines camera properties, including distance, resolution, and focal length.
+    - `Manipulator`: Contains TCP motion range settings for Panda manipulation.
+    - `Human`: Range values for randomizing worker arm positions and location.
+- **RenderingParameters**:
+    - `NumberImages`: Number of images to render per run.
+    - `OutputDir`: Directory to save rendered images and CSV logs.
+- **LabelParameters**:
+    - `CategoryIDs`: Dictionary mapping object names to category IDs for segmentation.
+
+For more information on how to adjust the `config.json` parameters, please see UserManual.txt
+
+### Running the Image Generator Pipeline
+
+To run the main script, execute the following statement in your terminal.
 
 ```bash
-python temp.py
+blenderproc run ImageGenerator.py
 ```
 
-### Configuration
+You will see the current progress in your console. Running this script will automatically create a folder `output`, where the generated images and annotations will be saved.
 
-The `config.json` file allows you to control various aspects of the rendering pipeline, including:
-
-- **Scene Parameters**: Adjusts the scene file path, camera settings, light properties, object categories, and randomization ranges.
-- **Rendering Parameters**: Sets output directory and number of images to render.
-- **Safety Zone Parameters**: Specifies minimum distances between objects to ensure compliance with safety rules.
 
 ### Documentation Generation
 
-You can generate HTML documentation from docstrings using `pdoc` or `Sphinx`.
+You can generate HTML documentation from docstrings using `pdoc`.
+Install by running the following pip command:
+
+```bash
+pip install pdoc
+```
 
 #### Using pdoc
 
 To generate and view documentation in HTML format, run:
 
 ```bash
-pdoc temp.py -o docs
+pdoc ImageGenerator.py -o docs
 ```
 
 This will save the documentation in the `docs` folder.
 
-#### Using Sphinx
+If you want to open it directly in your Brwoser, run:
 
-To generate Sphinx documentation:
-
-1. Initialize Sphinx (if not already initialized):
-
-   ```bash
-   sphinx-quickstart
-   ```
-
-2. Configure `conf.py` to use `autodoc` and add your project’s path.
-
-3. Generate HTML documentation:
-
-   ```bash
-   sphinx-apidoc -o source/ .
-   sphinx-build -b html source/ docs/
-   ```
-
-Open `docs/index.html` in your browser to view the generated documentation.
+```bash
+pdoc ImageGenerator.py
+```
 
 ## Code Overview
 
@@ -129,18 +128,18 @@ Open `docs/index.html` in your browser to view the generated documentation.
 - **`load_config`**: Loads settings from `config.json` to control the pipeline.
 - **`load_scene_from_blend`**: Loads objects from a Blender `.blend` file and categorizes them for easy access.
 - **`randomize_*` functions**: Randomizes object properties (e.g., position, rotation) to introduce variability across renders.
-- **`collision_check_*` functions**: Checks for collisions and ensures compliance with safety zones by adjusting object positions.
+- **`collision_check_*` functions**: Checks for collisions to prevent overlaps of objects and identifies safety zone violations.
 - **`render_scene`**: Renders the scene and saves both images and segmentation maps.
 - **`log_to_csv`**: Logs metadata (e.g., violation flags, distances) to a CSV file for each image.
 
-### Main Script: `temp.py`
+### Main Script: `ImageGenerator.py`
 
 The main script initializes the rendering environment, loads configurations, sets up the scene, performs randomization, checks for safety violations, renders images, and logs metadata. This script iterates through the specified number of images to generate a diverse set of renders.
 
 ## Example Workflow
 
 1. **Set up** the `config.json` file with your preferred parameters.
-2. **Run** the `temp.py` script to generate images in bulk with varied parameters.
+2. **Run** the `ImageGenerator.py` script to generate images in bulk with varied parameters.
 3. **View** generated images and analyze metadata in `rendered_data.csv`.
 4. **Generate documentation** to understand the codebase, if needed.
 
@@ -154,6 +153,3 @@ If you'd like to contribute, please fork the repository and make changes as you'
 4. Push to the branch (`git push origin feature-branch`).
 5. Create a new Pull Request.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
