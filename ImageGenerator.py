@@ -288,6 +288,7 @@ def randomize_worker(worker, config):
     # Randomize the overall position of the worker within specified x and y position ranges
     randomize_position(worker, arm_cfg["PositionRange"]["x"], arm_cfg["PositionRange"]["y"])
 
+    return worker
 
 def subdivide_object(obj, cuts=10):
     """
@@ -400,7 +401,7 @@ def collision_check_objects(obj1, obj2):
         return False
 
 
-def collision_check_scene(workpiece, config):
+def collision_check_scene(workpiece, worker, config):
     """
     Continuously checks for collisions between the workpiece and specific objects in the scene,
     randomizing the workpiece's position if a collision is detected.
@@ -412,20 +413,30 @@ def collision_check_scene(workpiece, config):
     # Retrieve reference objects from the scene for collision checking
     vest = bpy.data.objects.get('Ch17_Vest')
     panda_leg = bpy.data.objects.get('Link-0')
+    table = bpy.data.objects.get('Table')
 
     # Initial collision checks for the workpiece against the vest and panda_leg
     check1 = collision_check_objects(workpiece, vest)
     check2 = collision_check_objects(workpiece, panda_leg)
+    check3 = collision_check_objects(vest, table)
 
     # If a collision is detected, randomize workpiece position and re-check until no collision
     while check1 or check2:
-        # Randomize workpiece's position based on config
-        workpiece = randomize_workpiece(workpiece, config)
+        print("Workpiece is colliding, repositioning...")
+        if config["SceneParameters"]["Workpiece"]["Randomization"]:
+            # Randomize workpiece's position based on config
+            workpiece = randomize_workpiece(workpiece, config)
+        else:
+            worker = randomize_worker(worker, config)
 
         # Re-check collisions after repositioning
         check1 = collision_check_objects(workpiece, vest)
         check2 = collision_check_objects(workpiece, panda_leg)
 
+    while check3:
+        print("Human is colliding, repositioning...")
+        worker = randomize_worker(worker, config)
+        check3 = collision_check_objects(vest, table)
 
 def get_evaluated_vertices_in_world_space(obj):
     """
@@ -680,15 +691,20 @@ def main():
         randomize_camera_and_light(table, config)
 
         # Randomize the positions and rotations of the main objects in the scene
-        randomize_panda(tcp, config)  # Randomize the Panda's Tool Center Point (TCP)
-        workpiece = randomize_workpiece(workpiece, config)  # Randomize workpiece size, rotation, and position
-        randomize_worker(worker[0], config)  # Randomize the worker's arm positions and location
+        if config["SceneParameters"]["Manipulator"]["Randomization"]:
+            randomize_panda(tcp, config)  # Randomize the Panda's Tool Center Point (TCP)
+
+        if config["SceneParameters"]["Workpiece"]["Randomization"]:
+            workpiece = randomize_workpiece(workpiece, config)  # Randomize workpiece size, rotation, and position
+
+        if config["SceneParameters"]["Human"]["Randomization"]:
+            worker = randomize_worker(worker[0], config)  # Randomize the worker's arm positions and location
 
         # Update the scene to apply transformations before collision checks
         bpy.context.view_layer.update()
 
-        # Check for collisions in the scene and reposition the workpiece if necessary
-        collision_check_scene(workpiece, config)
+        # Check for collisions in the scene and repositions if necessary
+        collision_check_scene(workpiece, worker, config)
 
         # Perform a safety check by measuring the distance between key objects (Hand and Gloves)
         violation, distance = safety_check(config)
