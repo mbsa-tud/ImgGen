@@ -4,7 +4,7 @@
 
 ## Overview
 
-The **ImageGen** project is designed to automate image generation and scene rendering using Blender. The project uses BlenderProc for setting up and rendering 3D scenes, randomizing various scene parameters, and checking for safety constraints. It also saves metadata, such as safety violations and distances, for each generated image. This project is ideal for creating annotated datasets for tasks like computer vision, robotics, or synthetic data generation.
+The **RISC** project is designed to automate image generation and scene rendering using Blender. The project uses BlenderProc for setting up and rendering 3D scenes, randomizing various scene parameters, and checking for safety constraints. It also saves metadata, such as safety violations and distances, for each generated image. This project is ideal for creating annotated datasets for tasks like computer vision, robotics, or synthetic data generation.
 
 ## Key Features
 
@@ -38,9 +38,7 @@ RISC/
 
 ### Prerequisites
 
-- **Blender**: Ensure Blender is installed, and you can use Blender’s `bpy` module.
-- **Python 3.8+**: The project uses Python to interact with Blender and render scenes.
-- **BlenderProc**: Install BlenderProc, a procedural Blender scripting tool, using the following command:
+- **Python 3.10**: The project uses Python to interact with Blender and render scenes.
 
 
 ### Installation
@@ -48,7 +46,7 @@ RISC/
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/mbsa-tud/RISC
+   git clone https://github.com/BeSchue/RISC
    ```
 
 2. **Set Up Virtual Environment** (optional but recommended):
@@ -125,7 +123,7 @@ pdoc ImageGenerator.py -o docs
 
 This will save the documentation in the `docs` folder.
 
-If you want to open it directly in your Brwoser, run:
+If you want to open it directly in your Browser, run:
 
 ```bash
 pdoc ImageGenerator.py
@@ -162,4 +160,3 @@ If you'd like to contribute, please fork the repository and make changes as you'
 3. Commit your changes (`git commit -am 'Add new feature'`).
 4. Push to the branch (`git push origin feature-branch`).
 5. Create a new Pull Request.
-
