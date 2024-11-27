@@ -48,7 +48,7 @@ RISC/
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/BeSchue/RISC
+   git clone https://github.com/mbsa-tud/RISC
    ```
 
 2. **Set Up Virtual Environment** (optional but recommended):
