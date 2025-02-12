@@ -1,7 +1,10 @@
 <div style="display: flex; align-items: center; justify-content: center;">
-  <img src="https://www.beschaeftigte.uni-stuttgart.de/uni-services/oeffentlichkeitsarbeit/corporate-design/cd-dateien/01_Logo/png/unistuttgart_logo_deutsch_cmyk-01.png" alt="Logo 1" width="500" style="margin-right: 150px;">
+  <img src="https://www.beschaeftigte.uni-stuttgart.de/uni-services/oeffentlichkeitsarbeit/corporate-design/cd-dateien/01_Logo/png/unistuttgart_logo_deutsch_cmyk-01.png" alt="Logo 1" width="500" style="padding-right: 150px;">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Bundesanstalt_f%C3%BCr_Arbeitsschutz_und_Arbeitsmedizin_Logo.svg/1024px-Bundesanstalt_f%C3%BCr_Arbeitsschutz_und_Arbeitsmedizin_Logo.svg.png" alt="Logo 2" width="250">
 </div>
+<p style="text-align: center; margin-top: 30px; padding: 0 50px;">
+  This is the text below the logos. It has some additional horizontal padding to ensure better spacing.
+</p>
 
 
 # RISC - Realistic Imaging for Safety-Critical Cobots
