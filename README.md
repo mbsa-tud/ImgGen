@@ -3,7 +3,7 @@
 <table>
   <tr>
     <td><img src="https://www.beschaeftigte.uni-stuttgart.de/uni-services/oeffentlichkeitsarbeit/corporate-design/cd-dateien/01_Logo/png/unistuttgart_logo_deutsch_cmyk-01.png" alt="Logo 1" width="150"></td>
-    <td><img src="[https://example.com/logo2.png](https://upload.wikimedia.org/wikipedia/commons/2/25/Bundesanstalt_f%C3%BCr_Arbeitsschutz_und_Arbeitsmedizin_Logo.svg)" alt="Logo 2" width="150"></td>
+    <td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Bundesanstalt_f%C3%BCr_Arbeitsschutz_und_Arbeitsmedizin_Logo.svg/1024px-Bundesanstalt_f%C3%BCr_Arbeitsschutz_und_Arbeitsmedizin_Logo.svg.png" alt="Logo 2" width="150"></td>
   </tr>
 </table>
 
