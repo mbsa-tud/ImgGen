@@ -1,10 +1,7 @@
-<div style="display: flex; align-items: center; justify-content: center;">
-  <img src="https://www.beschaeftigte.uni-stuttgart.de/uni-services/oeffentlichkeitsarbeit/corporate-design/cd-dateien/01_Logo/png/unistuttgart_logo_deutsch_cmyk-01.png" alt="Logo 1" width="500" style="padding-right: 150px;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Bundesanstalt_f%C3%BCr_Arbeitsschutz_und_Arbeitsmedizin_Logo.svg/1024px-Bundesanstalt_f%C3%BCr_Arbeitsschutz_und_Arbeitsmedizin_Logo.svg.png" alt="Logo 2" width="250">
+<div style="display: flex; align-items: center; justify-content: space-around">
+  <img src="https://www.beschaeftigte.uni-stuttgart.de/uni-services/oeffentlichkeitsarbeit/corporate-design/cd-dateien/01_Logo/png/unistuttgart_logo_deutsch_cmyk-01.png" alt="Logo 1" width="450">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Bundesanstalt_f%C3%BCr_Arbeitsschutz_und_Arbeitsmedizin_Logo.svg/1024px-Bundesanstalt_f%C3%BCr_Arbeitsschutz_und_Arbeitsmedizin_Logo.svg.png" alt="Logo 2" width="230">
 </div>
-<p style="text-align: center; margin-top: 100px; padding: 0 100px;">
-</p>
-
 
 # RISC - Realistic Imaging for Safety-Critical Cobots
 
@@ -166,3 +163,15 @@ If you'd like to contribute, please fork the repository and make changes as you'
 3. Commit your changes (`git commit -am 'Add new feature'`).
 4. Push to the branch (`git push origin feature-branch`).
 5. Create a new Pull Request.
+
+## License
+
+This data set is published under the Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) licence (https://creativecommons.org/licenses/by-sa/4.0/deed.en).
+
+Dieser Datensatz wird unter der Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) Lizenz veröffentlicht (https://creativecommons.org/licenses/by-sa/4.0/deed.de).
+
+## Acknowledgements
+
+The development of this data set was funded by the Federal Ministry of Labour and Social Affairs (BMAS) and the Federal Institute for Occupational Safety and Health (BAuA) under the administrative agreement ‘Artificial Intelligence in a Safe and Healthy Working Environment’.
+
+Die Entwicklung dieses Datensatzes wurde durch das Bundesministerium für Arbeit und Soziales (BMAS) und die Bundesanstalt für Arbeitsschutz und Arbeitsmedizin (BAuA) unter der Verwaltungsvereinbarung "Künstliche Intelligenz in einer sicheren und gesunden Arbeitswelt" gefördert.
