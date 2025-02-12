@@ -1,6 +1,6 @@
-<div style="display: flex; align-items: center;">
-  <img src="https://www.beschaeftigte.uni-stuttgart.de/uni-services/oeffentlichkeitsarbeit/corporate-design/cd-dateien/01_Logo/png/unistuttgart_logo_deutsch_cmyk-01.png" alt="Logo 1" width="350" style="margin-right: 250px">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Bundesanstalt_f%C3%BCr_Arbeitsschutz_und_Arbeitsmedizin_Logo.svg/1024px-Bundesanstalt_f%C3%BCr_Arbeitsschutz_und_Arbeitsmedizin_Logo.svg.png" alt="Logo 2" width="200">
+<div style="display: flex; align-items: center; justify-content: center;">
+  <img src="https://www.beschaeftigte.uni-stuttgart.de/uni-services/oeffentlichkeitsarbeit/corporate-design/cd-dateien/01_Logo/png/unistuttgart_logo_deutsch_cmyk-01.png" alt="Logo 1" width="350" style="margin-right: 150px;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Bundesanstalt_f%C3%BCr_Arbeitsschutz_und_Arbeitsmedizin_Logo.svg/1024px-Bundesanstalt_f%C3%BCr_Arbeitsschutz_und_Arbeitsmedizin_Logo.svg.png" alt="Logo 2" width="220">
 </div>
 
 
